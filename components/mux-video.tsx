@@ -6,9 +6,10 @@ interface MuxVideoProps {
   playbackId: string
   title: string
   className?: string
+  thumbnailTime?: number
 }
 
-export default function MuxVideo({ playbackId, title, className = "" }: MuxVideoProps) {
+export default function MuxVideo({ playbackId, title, className = "", thumbnailTime = 0 }: MuxVideoProps) {
   return (
     <MuxPlayer
       playbackId={playbackId}
@@ -17,7 +18,7 @@ export default function MuxVideo({ playbackId, title, className = "" }: MuxVideo
       accentColor="#FFFFFF"
       className={className}
       style={{ aspectRatio: "9/16", width: "100%" } as React.CSSProperties}
-      thumbnailTime={0}
+      thumbnailTime={thumbnailTime}
     />
   )
 }

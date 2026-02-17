@@ -390,10 +390,10 @@ export default function Home() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                 {[
-                  { title: "Raat Ka Rivaz", type: "Club Ecstasy, Manipal", playbackId: "apPdW3u201w2MZW36h2bekewZePawf4tMjDurBO7s2jQ" },
-                  { title: "Milan", type: "SJEC, Mangalore", playbackId: "hUCHyMqJtwifSRvN5CWqCZXbB1cVlIU2dNOeNs8Hw8E" },
-                  { title: "New Year's Eve", type: "Club Ecstasy, Manipal", playbackId: "8UtFZTKSYamKt00fKyUqLS01xumCm4ajpB02Do5BHPVvBA" },
-                  { title: "Blackout Affair", type: "Big Shot, Manipal", playbackId: "1SiHqKUbowFSV00Yf2GsNAo5WjtKfhSHSN2c1BOW7rzM" },
+                  { title: "Raat Ka Rivaz", type: "Club Ecstasy, Manipal", playbackId: "apPdW3u201w2MZW36h2bekewZePawf4tMjDurBO7s2jQ", thumbnailTime: 0 },
+                  { title: "Milan", type: "SJEC, Mangalore", playbackId: "hUCHyMqJtwifSRvN5CWqCZXbB1cVlIU2dNOeNs8Hw8E", thumbnailTime: 0 },
+                  { title: "New Year's Eve", type: "Club Ecstasy, Manipal", playbackId: "8UtFZTKSYamKt00fKyUqLS01xumCm4ajpB02Do5BHPVvBA", thumbnailTime: 5 },
+                  { title: "Blackout Affair", type: "Big Shot, Manipal", playbackId: "1SiHqKUbowFSV00Yf2GsNAo5WjtKfhSHSN2c1BOW7rzM", thumbnailTime: 0 },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -411,7 +411,7 @@ export default function Home() {
                     className="group"
                   >
                     <div className="relative overflow-hidden mb-4 bg-white/5">
-                      <MuxVideo playbackId={item.playbackId} title={item.title} />
+                      <MuxVideo playbackId={item.playbackId} title={item.title} thumbnailTime={item.thumbnailTime} />
                     </div>
                     <div className="flex justify-between items-start border-t border-white/20 pt-4">
                       <div>
@@ -498,9 +498,6 @@ export default function Home() {
                                     <span className="font-mono text-xs uppercase tracking-wider border border-current px-2 py-1 rounded-full">
                                       {gig.city}
                                     </span>
-                                    <a href="#" className="text-sm uppercase font-bold tracking-wider hover:underline opacity-50 pointer-events-none">
-                                      Gallery
-                                    </a>
                                   </div>
                                 </div>
                               </motion.div>
@@ -677,7 +674,9 @@ export default function Home() {
                     transition={{ delay: 0.4 }}
                   >
                     <a
-                      href="mailto:ecliptix.official@gmail.com"
+                      href="https://mail.google.com/mail/?view=cm&to=ecliptix.official@gmail.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer break-all"
                     >
                       <Mail className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
@@ -733,9 +732,7 @@ export default function Home() {
                         transition={{ delay: 0.3 }}
                         className="text-lg"
                       >
-                        Mangalore & Manipal
-                        <br />
-                        Karnataka, India
+                        India
                       </motion.p>
                     </div>
                   </div>
