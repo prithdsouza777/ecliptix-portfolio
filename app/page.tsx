@@ -674,13 +674,13 @@ export default function Home() {
                     transition={{ delay: 0.4 }}
                   >
                     <a
-                      href="https://mail.google.com/mail/?view=cm&to=ecliptix.official@gmail.com"
+                      href="https://mail.google.com/mail/?view=cm&to=official.ecliptix@gmail.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer break-all"
                     >
                       <Mail className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
-                      ecliptix.official@gmail.com
+                      official.ecliptix@gmail.com
                     </a>
                   </motion.div>
                   <motion.div
