@@ -415,8 +415,8 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between items-start border-t border-white/20 pt-4">
                       <div>
-                        <h3 className="text-2xl font-medium">{item.title}</h3>
-                        <span className="text-sm text-muted-foreground font-mono">{item.type}</span>
+                        <h3 className="text-base md:text-2xl font-medium">{item.title}</h3>
+                        <span className="text-xs md:text-sm text-muted-foreground font-mono">{item.type}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -486,11 +486,11 @@ export default function Home() {
                                 }}
                                 className="group flex flex-col md:flex-row md:items-center justify-between py-8 hover:bg-white/[0.03] transition-all duration-300 px-4 -mx-4"
                               >
-                                <div className="flex items-center gap-8 md:w-auto md:min-w-fit">
-                                  <span className="font-mono text-sm md:text-base opacity-50 group-hover:opacity-100 transition-opacity">
+                                <div className="flex items-center gap-4 md:gap-8 md:w-auto md:min-w-fit">
+                                  <span className="font-mono text-xs md:text-base opacity-50 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                                     {gig.date}
                                   </span>
-                                  <span className="text-2xl md:text-4xl font-bold uppercase whitespace-nowrap">{gig.event}</span>
+                                  <span className="text-lg md:text-4xl font-bold uppercase truncate md:whitespace-nowrap">{gig.event}</span>
                                 </div>
                                 <div className="flex flex-col md:flex-row md:items-center justify-between flex-1 mt-4 md:mt-0 md:pl-10">
                                   <span className="text-lg md:text-xl font-light">{gig.venue}</span>
@@ -586,7 +586,7 @@ export default function Home() {
                         duration: 0.6,
                         ease: [0.33, 1, 0.68, 1],
                       }}
-                      className="group w-[calc(33.333%-1.34rem)] flex-shrink-0"
+                      className="group w-[75vw] md:w-[calc(33.333%-1.34rem)] flex-shrink-0"
                     >
                       <div className="aspect-video relative overflow-hidden mb-6 bg-white/5">
                         <iframe
@@ -652,13 +652,13 @@ export default function Home() {
           <div className="h-40 bg-gradient-to-b from-background via-neutral-900 to-white" />
 
           {/* ── Contact / Footer ────────────────────────────────── */}
-          <footer id="contact" className="relative py-32 px-6 md:px-16 bg-white text-black cursor-dark">
+          <footer id="contact" className="relative py-16 md:py-32 px-6 md:px-16 bg-white text-black cursor-dark">
             <div className="max-w-7xl mx-auto relative z-10">
               <div className="grid md:grid-cols-2 gap-16">
                 <div>
-                  <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8">
-                    <WordReveal text="LET'S" className="block text-6xl md:text-8xl font-bold tracking-tighter" />
-                    <WordReveal text="CONNECT" className="block text-6xl md:text-8xl font-bold tracking-tighter" delay={0.15} />
+                  <h2 className="text-4xl md:text-8xl font-bold tracking-tighter mb-8">
+                    <WordReveal text="LET'S" className="block text-4xl md:text-8xl font-bold tracking-tighter" />
+                    <WordReveal text="CONNECT" className="block text-4xl md:text-8xl font-bold tracking-tighter" delay={0.15} />
                   </h2>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -678,9 +678,9 @@ export default function Home() {
                   >
                     <a
                       href="mailto:ecliptix.official@gmail.com"
-                      className="relative z-20 inline-flex items-center gap-3 text-2xl md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer"
+                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer break-all"
                     >
-                      <Mail className="w-8 h-8" />
+                      <Mail className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
                       ecliptix.official@gmail.com
                     </a>
                   </motion.div>
@@ -693,9 +693,9 @@ export default function Home() {
                   >
                     <a
                       href="tel:+919449181617"
-                      className="relative z-20 inline-flex items-center gap-3 text-2xl md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer"
+                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer"
                     >
-                      <Phone className="w-8 h-8" />
+                      <Phone className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
                       +91 94491 81617
                     </a>
                   </motion.div>
