@@ -227,8 +227,8 @@ export default function Home() {
           <nav
             className={`fixed z-40 flex justify-between items-center transition-all duration-500 ${
               isScrolled
-                ? "top-4 left-6 right-6 md:left-8 md:right-8 backdrop-blur-xl bg-black/50 border border-white/10 py-3 px-6 text-white"
-                : "top-0 left-0 right-0 p-6 md:p-8 mix-blend-difference text-white"
+                ? "top-2 left-3 right-3 md:top-4 md:left-8 md:right-8 backdrop-blur-xl bg-black/50 border border-white/10 py-2 px-3 md:py-3 md:px-6 text-white"
+                : "top-0 left-0 right-0 p-4 md:p-8 mix-blend-difference text-white"
             }`}
           >
             <div
@@ -295,7 +295,7 @@ export default function Home() {
           </AnimatePresence>
 
           {/* ── Hero Section ────────────────────────────────────── */}
-          <section ref={heroRef} className="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-20 relative border-b border-white/10 overflow-hidden">
+          <section ref={heroRef} className="min-h-screen flex flex-col justify-center px-4 md:px-16 pt-20 relative border-b border-white/10 overflow-hidden">
             {/* Animated gradient blobs behind the grid */}
             <div className="absolute inset-0 overflow-hidden">
               <div
@@ -350,7 +350,7 @@ export default function Home() {
                 <motion.div variants={heroChild}>
                   <WordReveal
                     text="Living in your reality."
-                    className="text-lg md:text-xl text-muted-foreground max-w-md leading-relaxed block"
+                    className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-md leading-relaxed block"
                     delay={0.8}
                   />
                 </motion.div>
@@ -358,7 +358,7 @@ export default function Home() {
                 <motion.div variants={heroChild} className="flex gap-4 md:justify-end">
                   <MagneticButton
                     href="#work"
-                    className="px-8 py-4 bg-foreground text-background font-mono text-sm uppercase tracking-wider hover:bg-white/90 transition-colors flex items-center gap-2 group"
+                    className="px-6 py-3 md:px-8 md:py-4 bg-foreground text-background font-mono text-xs sm:text-sm uppercase tracking-wider hover:bg-white/90 transition-colors flex items-center gap-2 group"
                   >
                     Explore
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -369,13 +369,13 @@ export default function Home() {
           </section>
 
           {/* ── Gradient divider ─────────────────────────────────── */}
-          <div className="h-32 bg-gradient-to-b from-background via-white/[0.02] to-background" />
+          <div className="h-16 md:h-32 bg-gradient-to-b from-background via-white/[0.02] to-background" />
 
           {/* ── Latest Releases Section ────────────────────────── */}
-          <section id="work" className="py-32 px-6 md:px-16 border-b border-white/10">
+          <section id="work" className="py-16 md:py-32 px-4 md:px-16 border-b border-white/10">
             <div className="max-w-7xl mx-auto">
-              <div className="flex justify-between items-end mb-16">
-                <h2 className="text-4xl md:text-6xl font-light tracking-tighter">
+              <div className="flex justify-between items-end mb-8 md:mb-16">
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-light tracking-tighter">
                   <SectionTitle>EVENT HIGHLIGHTS</SectionTitle>
                 </h2>
                 <motion.span
@@ -388,7 +388,7 @@ export default function Home() {
                 </motion.span>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8">
                 {[
                   { title: "Raat Ka Rivaz", type: "Club Ecstasy, Manipal", playbackId: "apPdW3u201w2MZW36h2bekewZePawf4tMjDurBO7s2jQ", thumbnailTime: 0 },
                   { title: "Milan", type: "SJEC, Mangalore", playbackId: "hUCHyMqJtwifSRvN5CWqCZXbB1cVlIU2dNOeNs8Hw8E", thumbnailTime: 0 },
@@ -408,15 +408,15 @@ export default function Home() {
                       delay: i * 0.15,
                       ease: [0.77, 0, 0.175, 1],
                     }}
-                    className="group"
+                    className="group overflow-hidden"
                   >
-                    <div className="relative overflow-hidden mb-4 bg-white/5">
+                    <div className="relative overflow-hidden mb-2 md:mb-4 bg-white/5">
                       <MuxVideo playbackId={item.playbackId} title={item.title} thumbnailTime={item.thumbnailTime} />
                     </div>
-                    <div className="flex justify-between items-start border-t border-white/20 pt-4">
-                      <div>
-                        <h3 className="text-base md:text-2xl font-medium">{item.title}</h3>
-                        <span className="text-xs md:text-sm text-muted-foreground font-mono">{item.type}</span>
+                    <div className="border-t border-white/20 pt-2 md:pt-4">
+                      <div className="min-w-0">
+                        <h3 className="text-sm sm:text-base md:text-2xl font-medium truncate">{item.title}</h3>
+                        <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground font-mono block truncate">{item.type}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -426,12 +426,12 @@ export default function Home() {
           </section>
 
           {/* ── Gradient divider ─────────────────────────────────── */}
-          <div className="h-24 bg-gradient-to-b from-background to-white/[0.03]" />
+          <div className="h-12 md:h-24 bg-gradient-to-b from-background to-white/[0.03]" />
 
           {/* ── Recent Events Section ────────────────────────────── */}
-          <section id="tour" className="py-32 px-6 md:px-16 bg-white/5 border-b border-white/10">
+          <section id="tour" className="py-16 md:py-32 px-4 md:px-16 bg-white/5 border-b border-white/10">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-light mb-16 tracking-tighter">
+              <h2 className="text-2xl sm:text-4xl md:text-6xl font-light mb-8 md:mb-16 tracking-tighter">
                 <SectionTitle>RECENT EVENTS</SectionTitle>
               </h2>
 
@@ -484,21 +484,19 @@ export default function Home() {
                                   duration: 0.6,
                                   ease: [0.33, 1, 0.68, 1],
                                 }}
-                                className="group flex flex-col md:flex-row md:items-center justify-between py-8 hover:bg-white/[0.03] transition-all duration-300 px-4 -mx-4"
+                                className="group flex flex-col md:flex-row md:items-center justify-between py-4 md:py-8 hover:bg-white/[0.03] transition-all duration-300 px-2 md:px-4 -mx-2 md:-mx-4 overflow-hidden"
                               >
-                                <div className="flex items-center gap-4 md:gap-8 md:w-auto md:min-w-fit">
-                                  <span className="font-mono text-xs md:text-base opacity-50 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                <div className="flex items-center gap-2 md:gap-8 min-w-0 md:w-auto md:min-w-fit">
+                                  <span className="font-mono text-[10px] sm:text-xs md:text-base opacity-50 group-hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0">
                                     {gig.date}
                                   </span>
-                                  <span className="text-lg md:text-4xl font-bold uppercase truncate md:whitespace-nowrap">{gig.event}</span>
+                                  <span className="text-sm sm:text-lg md:text-4xl font-bold uppercase truncate min-w-0">{gig.event}</span>
                                 </div>
-                                <div className="flex flex-col md:flex-row md:items-center justify-between flex-1 mt-4 md:mt-0 md:pl-10">
-                                  <span className="text-lg md:text-xl font-light">{gig.venue}</span>
-                                  <div className="flex items-center gap-4 mt-2 md:mt-0">
-                                    <span className="font-mono text-xs uppercase tracking-wider border border-current px-2 py-1 rounded-full">
-                                      {gig.city}
-                                    </span>
-                                  </div>
+                                <div className="flex items-center justify-between md:flex-row md:items-center flex-1 mt-2 md:mt-0 md:pl-10 gap-2">
+                                  <span className="text-sm sm:text-lg md:text-xl font-light truncate min-w-0">{gig.venue}</span>
+                                  <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider border border-current px-2 py-0.5 md:py-1 rounded-full whitespace-nowrap flex-shrink-0">
+                                    {gig.city}
+                                  </span>
                                 </div>
                               </motion.div>
                             </div>
@@ -529,13 +527,13 @@ export default function Home() {
           </section>
 
           {/* ── Gradient divider ─────────────────────────────────── */}
-          <div className="h-24 bg-gradient-to-b from-white/[0.03] to-background" />
+          <div className="h-12 md:h-24 bg-gradient-to-b from-white/[0.03] to-background" />
 
           {/* ── Latest Releases Section ──────────────────────────── */}
-          <section id="blog" className="py-32 px-6 md:px-16 border-b border-white/10">
+          <section id="blog" className="py-16 md:py-32 px-4 md:px-16 border-b border-white/10">
             <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                <h2 className="text-4xl md:text-6xl font-light tracking-tighter">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4 md:gap-8">
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-light tracking-tighter">
                   <SectionTitle>LATEST RELEASES</SectionTitle>
                 </h2>
                 <a
@@ -551,7 +549,7 @@ export default function Home() {
               <div className="relative group/carousel">
                 <button
                   onClick={() => releasesRef.current?.scrollBy({ left: -400, behavior: "smooth" })}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background/80 backdrop-blur-sm hover:border-white/60 hover:bg-white/10 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100"
+                  className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background/80 backdrop-blur-sm hover:border-white/60 hover:bg-white/10 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100"
                   aria-label="Previous releases"
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -559,7 +557,7 @@ export default function Home() {
 
                 <div
                   ref={releasesRef}
-                  className="flex gap-8 overflow-x-auto pb-4 releases-scroll"
+                  className="flex gap-4 md:gap-8 overflow-x-auto pb-4 releases-scroll"
                   onWheel={(e) => {
                     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                       e.currentTarget.scrollLeft += e.deltaY
@@ -583,9 +581,9 @@ export default function Home() {
                         duration: 0.6,
                         ease: [0.33, 1, 0.68, 1],
                       }}
-                      className="group w-[75vw] md:w-[calc(33.333%-1.34rem)] flex-shrink-0"
+                      className="group w-[70vw] sm:w-[75vw] md:w-[calc(33.333%-1.34rem)] flex-shrink-0"
                     >
-                      <div className="aspect-video relative overflow-hidden mb-6 bg-white/5">
+                      <div className="aspect-video relative overflow-hidden mb-3 md:mb-6 bg-white/5">
                         <iframe
                           src={`https://www.youtube.com/embed/${release.videoId}`}
                           title={release.title}
@@ -594,9 +592,9 @@ export default function Home() {
                           className="absolute inset-0 w-full h-full border-0"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <span className="text-xs font-mono text-muted-foreground uppercase">{release.type}</span>
-                        <h3 className="text-xl font-medium leading-snug group-hover:text-stroke transition-all duration-300">
+                      <div className="space-y-1 md:space-y-2">
+                        <span className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase">{release.type}</span>
+                        <h3 className="text-sm sm:text-base md:text-xl font-medium leading-snug group-hover:text-stroke transition-all duration-300">
                           {release.title}
                         </h3>
                       </div>
@@ -606,7 +604,7 @@ export default function Home() {
 
                 <button
                   onClick={() => releasesRef.current?.scrollBy({ left: 400, behavior: "smooth" })}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background/80 backdrop-blur-sm hover:border-white/60 hover:bg-white/10 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100"
+                  className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background/80 backdrop-blur-sm hover:border-white/60 hover:bg-white/10 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100"
                   aria-label="Next releases"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -646,23 +644,23 @@ export default function Home() {
           </section>
 
           {/* ── Gradient transition into footer ──────────────────── */}
-          <div className="h-40 bg-gradient-to-b from-background via-neutral-900 to-white" />
+          <div className="h-20 md:h-40 bg-gradient-to-b from-background via-neutral-900 to-white" />
 
           {/* ── Contact / Footer ────────────────────────────────── */}
-          <footer id="contact" className="relative py-16 md:py-32 px-6 md:px-16 bg-white text-black cursor-dark">
+          <footer id="contact" className="relative py-12 md:py-32 px-4 md:px-16 bg-white text-black cursor-dark">
             <div className="max-w-7xl mx-auto relative z-10">
-              <div className="grid md:grid-cols-2 gap-16">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-16">
                 <div>
-                  <h2 className="text-4xl md:text-8xl font-bold tracking-tighter mb-8">
-                    <WordReveal text="LET'S" className="block text-4xl md:text-8xl font-bold tracking-tighter" />
-                    <WordReveal text="CONNECT" className="block text-4xl md:text-8xl font-bold tracking-tighter" delay={0.15} />
+                  <h2 className="text-3xl sm:text-4xl md:text-8xl font-bold tracking-tighter mb-4 md:mb-8">
+                    <WordReveal text="LET'S" className="block text-3xl sm:text-4xl md:text-8xl font-bold tracking-tighter" />
+                    <WordReveal text="CONNECT" className="block text-3xl sm:text-4xl md:text-8xl font-bold tracking-tighter" delay={0.15} />
                   </h2>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="text-xl md:text-2xl font-light max-w-md mb-12"
+                    className="text-base sm:text-xl md:text-2xl font-light max-w-md mb-6 md:mb-12"
                   >
                     Booking inquiries, promos, or just to say hello.
                   </motion.p>
@@ -677,9 +675,9 @@ export default function Home() {
                       href="https://mail.google.com/mail/?view=cm&to=official.ecliptix@gmail.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer break-all"
+                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-xs sm:text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer break-all"
                     >
-                      <Mail className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-8 md:h-8 flex-shrink-0" />
                       official.ecliptix@gmail.com
                     </a>
                   </motion.div>
@@ -692,19 +690,19 @@ export default function Home() {
                   >
                     <a
                       href="tel:+919449181617"
-                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer"
+                      className="relative z-20 inline-flex items-center gap-2 md:gap-3 text-xs sm:text-base md:text-3xl font-mono hover:opacity-70 transition-opacity cursor-pointer"
                     >
-                      <Phone className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" />
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-8 md:h-8 flex-shrink-0" />
                       +91 94491 81617
                     </a>
                   </motion.div>
                 </div>
 
                 <div className="flex flex-col justify-end">
-                  <div className="grid grid-cols-2 gap-8 mb-12">
-                    <div className="space-y-4">
-                      <h3 className="font-bold uppercase tracking-wider text-sm">Socials</h3>
-                      <ul className="space-y-2 text-lg">
+                  <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
+                    <div className="space-y-3 md:space-y-4">
+                      <h3 className="font-bold uppercase tracking-wider text-xs sm:text-sm">Socials</h3>
+                      <ul className="space-y-2 text-sm sm:text-lg">
                         {[
                           { name: "Instagram", href: "https://www.instagram.com/pritham.jpg/" },
                           { name: "YouTube", href: "https://www.youtube.com/@official.Ecliptix" },
@@ -723,25 +721,25 @@ export default function Home() {
                         ))}
                       </ul>
                     </div>
-                    <div className="space-y-4">
-                      <h3 className="font-bold uppercase tracking-wider text-sm">Based In</h3>
+                    <div className="space-y-3 md:space-y-4">
+                      <h3 className="font-bold uppercase tracking-wider text-xs sm:text-sm">Based In</h3>
                       <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
-                        className="text-lg"
+                        className="text-sm sm:text-lg"
                       >
                         India
                       </motion.p>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-end border-t border-black/10 pt-8">
-                    <div className="w-32 h-8 text-black">
+                  <div className="flex justify-between items-end border-t border-black/10 pt-4 md:pt-8 gap-4">
+                    <div className="w-20 sm:w-32 h-6 sm:h-8 text-black flex-shrink-0">
                       <EcliptixLogo className="text-black" />
                     </div>
-                    <p className="text-xs font-mono">© 2026 ECLIPTIX. All rights reserved.</p>
+                    <p className="text-[10px] sm:text-xs font-mono text-right">© 2026 ECLIPTIX. All rights reserved.</p>
                   </div>
                 </div>
               </div>
