@@ -148,7 +148,7 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [eventsPage, setEventsPage] = useState(0)
 
-  // ── Scroll to top only on hard refresh, not client-side navigation ──
+  // ── Scroll to top on hard refresh only, not client-side navigation ──
   useEffect(() => {
     const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
     if (navEntry?.type === "reload") {
