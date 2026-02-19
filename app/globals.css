@@ -200,7 +200,7 @@ body::after {
 @media (max-width: 767px) {
   .hero-bg-img {
     width: 160% !important;
-    left: -30% !important;
+    left: -60% !important;
   }
 }
 
