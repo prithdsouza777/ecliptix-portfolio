@@ -148,10 +148,12 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [eventsPage, setEventsPage] = useState(0)
 
-  // ── Force scroll to top on every page load / refresh ────────────
+  // ── Scroll to top only on hard refresh, not client-side navigation ──
   useEffect(() => {
-    history.scrollRestoration = "manual"
-    window.scrollTo(0, 0)
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
+    if (navEntry?.type === "reload") {
+      window.scrollTo(0, 0)
+    }
   }, [])
 
   // ── Lenis smooth scroll ─────────────────────────────────────────
