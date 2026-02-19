@@ -148,6 +148,12 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [eventsPage, setEventsPage] = useState(0)
 
+  // ── Force scroll to top on every page load / refresh ────────────
+  useEffect(() => {
+    history.scrollRestoration = "manual"
+    window.scrollTo(0, 0)
+  }, [])
+
   // ── Lenis smooth scroll ─────────────────────────────────────────
   useEffect(() => {
     const lenis = new Lenis({
