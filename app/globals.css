@@ -196,6 +196,14 @@ body::after {
   opacity: 1;
 }
 
+/* ===== HERO BACKGROUND — show more of image on mobile ===== */
+@media (max-width: 767px) {
+  .hero-bg-img {
+    width: 160% !important;
+    left: -30% !important;
+  }
+}
+
 /* ===== SLOW ZOOM FOR BACKGROUND IMAGES (KEN BURNS) ===== */
 @keyframes slow-zoom {
   0% {
