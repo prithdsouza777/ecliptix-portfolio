@@ -15,6 +15,9 @@ import EcliptixLogo from "@/components/ecliptix-logo"
 import Lenis from "lenis"
 import { LogoLoop } from "@/components/LogoLoop"
 import MuxVideo from "@/components/mux-video"
+import Image from "next/image"
+import Link from "next/link"
+import { allEvents } from "@/lib/events"
 
 // ── Word-by-word reveal component ──────────────────────────────────
 function WordReveal({
@@ -296,6 +299,20 @@ export default function Home() {
 
           {/* ── Hero Section ────────────────────────────────────── */}
           <section ref={heroRef} className="min-h-screen flex flex-col justify-center px-4 md:px-16 pt-20 relative border-b border-white/10 overflow-hidden">
+            {/* Background photo */}
+            <div className="absolute inset-0 overflow-hidden">
+              <Image
+                src="/background.jpg"
+                alt=""
+                fill
+                className="object-cover object-[center_65%] opacity-[0.55] bg-slow-zoom"
+                priority
+                sizes="100vw"
+                quality={75}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+            </div>
+
             {/* Animated gradient blobs behind the grid */}
             <div className="absolute inset-0 overflow-hidden">
               <div
@@ -436,28 +453,6 @@ export default function Home() {
               </h2>
 
               {(() => {
-                const allEvents = [
-                  { date: "FEB 14 '26", city: "Manipal", venue: "Big Shot", event: "Sweet Secret — Valentine's Day" },
-                  { date: "JAN 24 '26", city: "Manipal", venue: "Big Shot", event: "Pink City" },
-                  { date: "JAN 18 '26", city: "Manipal", venue: "Big Shot", event: "Sin City — Vol. II" },
-                  { date: "JAN 11 '26", city: "Manipal", venue: "Big Shot", event: "Blackout Affair" },
-                  { date: "DEC 31 '25", city: "Manipal", venue: "Ecstasy", event: "New Year's Eve" },
-                  { date: "NOV 29 '25", city: "Manipal", venue: "Hakuna Matata", event: "One Last Dance" },
-                  { date: "NOV 16 '25", city: "Mangalore", venue: "SJEC", event: "Hostel Day '25" },
-                  { date: "NOV 13 '25", city: "Manipal", venue: "SJEC", event: "Tiara '25" },
-                  { date: "OCT 10 '25", city: "Manipal", venue: "Ecstasy", event: "Badtameez Night" },
-                  { date: "SEP 19 '25", city: "Manipal", venue: "Ecstasy", event: "Raat Ka Rivaz" },
-                  { date: "AUG 08 '25", city: "Manipal", venue: "Hakuna Matata", event: "The Spotlight" },
-                  { date: "MAY 31 '25", city: "Mangalore", venue: "SJEC", event: "Alvida '25" },
-                  { date: "MAY 23 '25", city: "Mangalore", venue: "SJEC", event: "CSE Farewell" },
-                  { date: "MAR 20 '25", city: "Mangalore", venue: "SJEC", event: "Tiara '25" },
-                  { date: "MAR 11 '25", city: "Mangalore", venue: "SJEC", event: "Sports Day '25" },
-                  { date: "NOV 22 '24", city: "Mangalore", venue: "SJEC", event: "ECE Branch Entry" },
-                  { date: "NOV 20 '24", city: "Mangalore", venue: "SJEC", event: "Milan" },
-                  { date: "OCT 26 '24", city: "Mangalore", venue: "SJEC", event: "Freshers Day '24" },
-                  { date: "MAY 09 '24", city: "Mangalore", venue: "SJEC", event: "Tiara" },
-                  { date: "SEP 04 '24", city: "Mangalore", venue: "SJEC", event: "Fresher's Day '24" },
-                ];
                 const perPage = 5;
                 const totalPages = Math.ceil(allEvents.length / perPage);
                 const visible = allEvents.slice(eventsPage * perPage, (eventsPage + 1) * perPage);
@@ -474,7 +469,7 @@ export default function Home() {
                           transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
                         >
                           {visible.map((gig, i) => (
-                            <div key={i}>
+                            <div key={gig.slug}>
                               <AnimatedLine delay={i * 0.1} />
                               <motion.div
                                 initial={{ opacity: 0, x: -30 }}
@@ -494,9 +489,20 @@ export default function Home() {
                                 </div>
                                 <div className="flex items-center justify-between md:flex-row md:items-center flex-1 mt-2 md:mt-0 md:pl-10 gap-2">
                                   <span className="text-sm sm:text-lg md:text-xl font-light truncate min-w-0">{gig.venue}</span>
-                                  <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider border border-current px-2 py-0.5 md:py-1 rounded-full whitespace-nowrap flex-shrink-0">
-                                    {gig.city}
-                                  </span>
+                                  <div className="flex items-center gap-2 flex-shrink-0">
+                                    <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider border border-current px-2 py-0.5 md:py-1 rounded-full whitespace-nowrap">
+                                      {gig.city}
+                                    </span>
+                                    {/* Gallery button — unhide per-event as galleries are ready */}
+                                    {gig.slug === "sweet-secret-valentines-day" && (
+                                      <Link
+                                        href={`/gallery/${gig.slug}`}
+                                        className="font-mono text-xs sm:text-sm uppercase tracking-wider bg-white text-black px-4 py-1 md:px-5 md:py-1.5 rounded-full whitespace-nowrap hover:bg-white/80 transition-colors"
+                                      >
+                                        Gallery
+                                      </Link>
+                                    )}
+                                  </div>
                                 </div>
                               </motion.div>
                             </div>
