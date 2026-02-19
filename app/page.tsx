@@ -311,7 +311,7 @@ export default function Home() {
                 src="/background.jpg"
                 alt=""
                 fill
-                className="object-cover object-[25%_65%] md:object-[center_65%] opacity-[0.55] bg-slow-zoom"
+                className="object-cover object-[75%_65%] md:object-[center_65%] opacity-[0.55] bg-slow-zoom"
                 priority
                 sizes="100vw"
                 quality={75}
