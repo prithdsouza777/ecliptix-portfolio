@@ -705,7 +705,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col justify-end">
-                  <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
+                  <div className="grid grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
                     <div className="space-y-3 md:space-y-4">
                       <h3 className="font-bold uppercase tracking-wider text-xs sm:text-sm">Socials</h3>
                       <ul className="space-y-2 text-sm sm:text-lg">
@@ -723,6 +723,22 @@ export default function Home() {
                             <a href={social.href} target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4 transition-all duration-200 hover:tracking-wide">
                               {social.name}
                             </a>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="space-y-3 md:space-y-4">
+                      <h3 className="font-bold uppercase tracking-wider text-xs sm:text-sm">Genres</h3>
+                      <ul className="space-y-2 text-sm sm:text-lg">
+                        {["Bollywood", "Commercial", "House", "Techno"].map((genre, i) => (
+                          <motion.li
+                            key={genre}
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 + i * 0.08 }}
+                          >
+                            {genre}
                           </motion.li>
                         ))}
                       </ul>
