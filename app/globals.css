@@ -196,6 +196,20 @@ body::after {
   opacity: 1;
 }
 
+/* ===== SLOW ZOOM FOR BACKGROUND IMAGES (KEN BURNS) ===== */
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.bg-slow-zoom {
+  animation: slow-zoom 30s ease-out forwards;
+}
+
 /* ===== ANIMATED GRADIENT BACKGROUND FOR HERO ===== */
 @keyframes gradient-shift {
   0% {
