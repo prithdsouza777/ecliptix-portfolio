@@ -82,7 +82,7 @@ async function fetchCloudinaryVideos(folder: string): Promise<GalleryItem[]> {
 
     const data: { resources?: { secure_url: string; width?: number; height?: number }[] } = await res.json()
     return (data.resources || []).map((r) => ({
-      url: r.secure_url,
+      url: r.secure_url.replace(/\.\w+$/, ".mp4"),
       width: r.width || 1080,
       height: r.height || 1920,
       type: "video" as const,
