@@ -181,8 +181,8 @@ body::after {
   filter: brightness(0) invert(1);
   opacity: 0.6;
   transition: opacity 0.3s ease;
-  height: 60px !important;
-  width: 80px !important;
+  height: 80px !important;
+  width: 110px !important;
   object-fit: contain;
 }
 @media (min-width: 768px) {
