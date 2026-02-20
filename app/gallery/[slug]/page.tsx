@@ -116,7 +116,20 @@ export default async function GalleryPage({ params }: Props) {
     fetchGalleryItems(event.gallery.folder),
     fetchCloudinaryVideos(event.gallery.folder),
   ])
-  const items = [...cloudinaryVideos, ...imageKitItems]
+
+  // Interleave videos evenly among images so the gallery looks unified
+  const images = imageKitItems.filter((i) => i.type === "image")
+  const videos = [...imageKitItems.filter((i) => i.type === "video"), ...cloudinaryVideos]
+  const items: GalleryItem[] = []
+  const step = videos.length > 0 ? Math.max(1, Math.floor(images.length / (videos.length + 1))) : 0
+  let vi = 0
+  for (let i = 0; i < images.length; i++) {
+    items.push(images[i])
+    if (vi < videos.length && step > 0 && (i + 1) % step === 0) {
+      items.push(videos[vi++])
+    }
+  }
+  while (vi < videos.length) items.push(videos[vi++])
 
   return <GalleryClient event={event} items={items} />
 }
