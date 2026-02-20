@@ -87,6 +87,31 @@ function VideoTile({ src, className }: { src: string; className?: string }) {
   )
 }
 
+/* ── Swipe hook for lightbox ─────────────────────────────── */
+function useSwipe(onLeft: () => void, onRight: () => void) {
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
+
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }, [])
+
+  const onTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStart.current) return
+      const dx = e.changedTouches[0].clientX - touchStart.current.x
+      const dy = e.changedTouches[0].clientY - touchStart.current.y
+      touchStart.current = null
+      // Only count horizontal swipes (ignore vertical scrolls)
+      if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return
+      if (dx < 0) onLeft()
+      else onRight()
+    },
+    [onLeft, onRight],
+  )
+
+  return { onTouchStart, onTouchEnd }
+}
+
 export default function GalleryClient({ event, items }: { event: EventData; items: GalleryItem[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
@@ -102,6 +127,8 @@ export default function GalleryClient({ event, items }: { event: EventData; item
     if (lightboxIndex === null) return
     setLightboxIndex((lightboxIndex - 1 + items.length) % items.length)
   }, [lightboxIndex, items.length])
+
+  const swipe = useSwipe(goNext, goPrev)
 
   useEffect(() => {
     if (lightboxIndex === null) return
@@ -133,7 +160,7 @@ export default function GalleryClient({ event, items }: { event: EventData; item
       </Link>
 
       {/* ── Hero area ───────────────────────────────────────── */}
-      <section className="pt-24 pb-12 md:pt-32 md:pb-16 px-4 md:px-16 border-b border-white/10">
+      <section className="pt-24 pb-8 md:pt-32 md:pb-16 px-4 md:px-16 border-b border-white/10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -144,7 +171,7 @@ export default function GalleryClient({ event, items }: { event: EventData; item
               <WordReveal text={event.event} />
             </h1>
 
-            <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-3 md:gap-6">
+            <div className="mt-3 md:mt-6 flex flex-wrap items-center gap-2 md:gap-6">
               <motion.span
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -195,25 +222,22 @@ export default function GalleryClient({ event, items }: { event: EventData; item
       </section>
 
       {/* ── Media grid ─────────────────────────────────────── */}
-      <section className="py-8 md:py-16 px-4 md:px-16">
-        <div className="max-w-7xl mx-auto columns-2 md:columns-3 gap-3 md:gap-4">
+      <section className="py-6 md:py-16 px-2 md:px-16">
+        <div className="max-w-7xl mx-auto columns-2 md:columns-3 gap-2 md:gap-4">
           {items.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
-              animate={{
-                opacity: 1,
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-              }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.8,
-                delay: 0.2 + i * 0.1,
-                ease: [0.77, 0, 0.175, 1],
+                duration: 0.5,
+                delay: Math.min(i * 0.06, 0.6),
+                ease: [0.33, 1, 0.68, 1],
               }}
-              className="mb-3 md:mb-4 break-inside-avoid group"
+              className="mb-2 md:mb-4 break-inside-avoid group"
               onClick={() => openLightbox(i)}
             >
-              <div className={`relative overflow-hidden cursor-pointer ${item.type === "video" ? "" : "bg-white/5"}`}>
+              <div className={`relative overflow-hidden cursor-pointer rounded-sm ${item.type === "video" ? "" : "bg-white/5"}`}>
                 {item.type === "video" ? (
                   <VideoTile
                     src={item.url}
@@ -229,7 +253,7 @@ export default function GalleryClient({ event, items }: { event: EventData; item
                     sizes="(max-width: 768px) 50vw, 33vw"
                   />
                 )}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none" />
               </div>
             </motion.div>
           ))}
@@ -254,35 +278,36 @@ export default function GalleryClient({ event, items }: { event: EventData; item
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
             onClick={closeLightbox}
+            {...swipe}
           >
-            {/* Close button */}
+            {/* Close button — larger tap target on mobile */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 md:top-8 md:right-8 z-10 p-2 text-white/60 hover:text-white transition-colors"
+              className="absolute top-3 right-3 md:top-8 md:right-8 z-10 p-3 text-white/60 hover:text-white transition-colors"
               aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
             </button>
 
-            {/* Previous */}
+            {/* Previous — hidden on mobile (use swipe instead) */}
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 goPrev()
               }}
-              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-10 p-2 text-white/40 hover:text-white transition-colors"
+              className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-10 p-2 text-white/40 hover:text-white transition-colors items-center justify-center"
               aria-label="Previous"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
 
-            {/* Next */}
+            {/* Next — hidden on mobile (use swipe instead) */}
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 goNext()
               }}
-              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-10 p-2 text-white/40 hover:text-white transition-colors"
+              className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 p-2 text-white/40 hover:text-white transition-colors items-center justify-center"
               aria-label="Next"
             >
               <ChevronRight className="w-8 h-8" />
@@ -295,7 +320,7 @@ export default function GalleryClient({ event, items }: { event: EventData; item
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-[90vw] max-h-[85vh]"
+              className="relative w-[92vw] max-w-4xl max-h-[80vh] md:max-h-[85vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               {items[lightboxIndex].type === "video" ? (
@@ -306,7 +331,7 @@ export default function GalleryClient({ event, items }: { event: EventData; item
                   controls
                   autoPlay
                   playsInline
-                  className="max-w-full max-h-[85vh] object-contain"
+                  className="max-w-full max-h-[80vh] md:max-h-[85vh] object-contain"
                 />
               ) : (
                 <Image
@@ -314,15 +339,15 @@ export default function GalleryClient({ event, items }: { event: EventData; item
                   alt={`${event.event} — Photo ${lightboxIndex + 1}`}
                   width={1600}
                   height={1200}
-                  className="max-w-full max-h-[85vh] object-contain"
-                  sizes="90vw"
+                  className="max-w-full max-h-[80vh] md:max-h-[85vh] object-contain"
+                  sizes="92vw"
                   priority
                 />
               )}
             </motion.div>
 
             {/* Counter */}
-            <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs text-white/40 tracking-widest">
+            <div className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs text-white/40 tracking-widest">
               {lightboxIndex + 1} / {items.length}
             </div>
           </motion.div>
