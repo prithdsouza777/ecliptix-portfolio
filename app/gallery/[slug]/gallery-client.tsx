@@ -41,6 +41,13 @@ function WordReveal({
   )
 }
 
+function videoPoster(src: string): string | undefined {
+  // Cloudinary: insert transformation to grab first frame as a jpg
+  const m = src.match(/^(https:\/\/res\.cloudinary\.com\/.+\/video\/upload\/)(v\d+\/.+)\.\w+$/)
+  if (m) return `${m[1]}so_0,w_480,f_jpg/${m[2]}.jpg`
+  return undefined
+}
+
 function VideoTile({ src, className }: { src: string; className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [paused, setPaused] = useState(true)
@@ -63,6 +70,8 @@ function VideoTile({ src, className }: { src: string; className?: string }) {
       <video
         ref={videoRef}
         src={src}
+        poster={videoPoster(src)}
+        preload="metadata"
         playsInline
         className={className}
         onEnded={() => setPaused(true)}
@@ -292,6 +301,8 @@ export default function GalleryClient({ event, items }: { event: EventData; item
               {items[lightboxIndex].type === "video" ? (
                 <video
                   src={items[lightboxIndex].url}
+                  poster={videoPoster(items[lightboxIndex].url)}
+                  preload="metadata"
                   controls
                   autoPlay
                   playsInline
