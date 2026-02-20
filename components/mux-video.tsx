@@ -1,6 +1,15 @@
 "use client"
 
-import MuxPlayer from "@mux/mux-player-react"
+import dynamic from "next/dynamic"
+
+const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{ aspectRatio: "9/16", width: "100%", background: "rgba(255,255,255,0.05)" }}
+    />
+  ),
+})
 
 interface MuxVideoProps {
   playbackId: string

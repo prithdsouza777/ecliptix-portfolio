@@ -150,9 +150,13 @@ export default function Home() {
 
   // ── Scroll to top on hard refresh only, not client-side navigation ──
   useEffect(() => {
-    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
-    if (navEntry?.type === "reload") {
-      window.scrollTo(0, 0)
+    try {
+      const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
+      if (navEntry?.type === "reload") {
+        window.scrollTo(0, 0)
+      }
+    } catch {
+      // Performance API unavailable on some mobile browsers
     }
   }, [])
 
